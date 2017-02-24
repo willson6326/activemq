@@ -22,25 +22,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class ProducerTest {
 	
 	@Resource
-	private Producer producer;
-
-	/**
-	 * @return the producer
-	 */
-	public Producer getProducer() {
-		return producer;
-	}
-
-	/**
-	 * @param producer the producer to set
-	 */
-	public void setProducer(Producer producer) {
-		this.producer = producer;
-	}
+	private ProducerListener producerListener;
 
 	/**
 	 * Test method for
-	 * {@link com.zhaiyz.activemq.Producer#sendMessage(java.lang.String)}.
+	 * {@link com.zhaiyz.activemq.ProducerListener#sendMessage(java.lang.String)}.
 	 * @throws Throwable 
 	 */
 	@Test
@@ -61,7 +47,8 @@ public class ProducerTest {
 		@Override
 		public void runTest() throws Throwable {
 			String request = "第" + this.hashCode() + "条信息";
-			Assert.assertEquals(request + "的应答！", producer.sendMessage(request));
+			Assert.assertEquals(request + "的应答！", producerListener.sendMessage(request));
+			//Assert.assertEquals(request + "的应答！", producerListener.convertAndSendMessage(request));
 		}
 		
 	}
